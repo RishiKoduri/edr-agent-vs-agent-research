@@ -23,6 +23,13 @@ class TrafficClass(str, Enum):
     AI_AGENT_ATTACKER = "ai_agent_attacker"
 
 
+class ArchitectureMode(str, Enum):
+    LOCAL = "local"
+    CENTRALIZED = "centralized"
+    FEDERATED = "federated"
+    HYBRID = "hybrid"
+
+
 @dataclass(frozen=True)
 class EndpointEvent:
     """One safe, abstract EDR-style telemetry event."""
@@ -37,10 +44,53 @@ class EndpointEvent:
     metadata: dict[str, Any] = field(default_factory=dict)
 
 
-@dataclass
+@dataclass(frozen=True)
+class SessionProfile:
+    traffic_class: TrafficClass
+    seed: int
+    session_id: str
+    endpoint_count: int = 5
+    length: int = 32
+    adaptation_level: int = 0
+
+
+@dataclass(frozen=True)
+class DetectionFeatures:
+    event_count: int
+    duration: float
+    mean_delta: float
+    delta_variation: float
+    endpoint_hops: int
+    high_risk_tool_count: int
+    lateral_movement_count: int
+    sensitive_to_exfil: bool
+    role_mismatch_count: int
+    repeated_tool_ratio: float
+    goal_directedness: float
+    human_noise_score: float
+    alert_adaptation_score: float
+
+
+@dataclass(frozen=True)
 class DetectionResult:
     suspicious: bool
     score: float
-    reasons: list[str]
+    reasons: tuple[str, ...]
+    features: DetectionFeatures
     detected_at: float | None = None
 
+
+@dataclass(frozen=True)
+class SimulationRun:
+    traffic_class: TrafficClass
+    architecture: ArchitectureMode
+    seed: int
+    session_id: str
+    detected: bool
+    score: float
+    reasons: tuple[str, ...]
+    time_to_detection: float | None
+    attack_success: bool
+    false_positive: bool
+    true_positive: bool
+    event_count: int
