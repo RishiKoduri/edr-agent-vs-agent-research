@@ -1,0 +1,91 @@
+traffic_class,seed,detected,score,reasons,time_to_detection
+benign_admin,0,False,0.00,,
+scripted_attacker,0,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,59.51553846903479
+ai_agent_attacker,0,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,258.9018438887048
+benign_admin,1,False,0.00,,
+scripted_attacker,1,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,58.04521014248845
+ai_agent_attacker,1,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,247.9167116637897
+benign_admin,2,False,0.00,,
+scripted_attacker,2,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,61.011600836862165
+ai_agent_attacker,2,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,270.0592580039267
+benign_admin,3,False,0.00,,
+scripted_attacker,3,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,59.02593704940968
+ai_agent_attacker,3,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,242.51469941573058
+benign_admin,4,False,0.00,,
+scripted_attacker,4,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,47.819073282336404
+ai_agent_attacker,4,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,233.47525062317084
+benign_admin,5,False,0.00,,
+scripted_attacker,5,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,54.019335360720966
+ai_agent_attacker,5,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,283.47289578790367
+benign_admin,6,False,0.00,,
+scripted_attacker,6,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,57.6775180454163
+ai_agent_attacker,6,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,254.1307987109475
+benign_admin,7,False,0.00,,
+scripted_attacker,7,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,44.77477260618192
+ai_agent_attacker,7,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,271.9483101536433
+benign_admin,8,False,0.00,,
+scripted_attacker,8,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,52.68206370152317
+ai_agent_attacker,8,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,239.17529994679037
+benign_admin,9,False,0.00,,
+scripted_attacker,9,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,43.277518357423986
+ai_agent_attacker,9,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,247.74776429182842
+benign_admin,10,False,0.00,,
+scripted_attacker,10,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,46.294320528289035
+ai_agent_attacker,10,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,243.44265137131637
+benign_admin,11,False,0.00,,
+scripted_attacker,11,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,56.20677449988182
+ai_agent_attacker,11,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,217.6001984805764
+benign_admin,12,False,0.00,,
+scripted_attacker,12,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,51.60970364951546
+ai_agent_attacker,12,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,240.89323574029643
+benign_admin,13,False,0.00,,
+scripted_attacker,13,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,52.77691658010835
+ai_agent_attacker,13,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,229.5139816428969
+benign_admin,14,False,0.00,,
+scripted_attacker,14,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,56.57763442506201
+ai_agent_attacker,14,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,187.66136727967424
+benign_admin,15,False,0.00,,
+scripted_attacker,15,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,60.50397575429059
+ai_agent_attacker,15,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,178.60171234733713
+benign_admin,16,False,0.00,,
+scripted_attacker,16,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,62.303340910575216
+ai_agent_attacker,16,True,4.50,high action tempo; lateral movement sequence; multi-endpoint path; repeated high-risk administration tools,213.70457878537604
+benign_admin,17,False,0.00,,
+scripted_attacker,17,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,53.70558459291318
+ai_agent_attacker,17,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,212.29369105808894
+benign_admin,18,False,0.00,,
+scripted_attacker,18,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,46.446936517178564
+ai_agent_attacker,18,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,225.79921346892843
+benign_admin,19,False,0.00,,
+scripted_attacker,19,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,57.37381641676095
+ai_agent_attacker,19,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,230.0463765290363
+benign_admin,20,False,0.00,,
+scripted_attacker,20,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,52.19843345086719
+ai_agent_attacker,20,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,237.83367265746156
+benign_admin,21,False,0.00,,
+scripted_attacker,21,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,52.32144210257544
+ai_agent_attacker,21,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,250.5994677924956
+benign_admin,22,False,0.00,,
+scripted_attacker,22,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,52.13924616664125
+ai_agent_attacker,22,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,222.8559105524166
+benign_admin,23,False,0.00,,
+scripted_attacker,23,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,41.03936831153302
+ai_agent_attacker,23,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,191.9727408792709
+benign_admin,24,False,0.00,,
+scripted_attacker,24,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,58.29449035094952
+ai_agent_attacker,24,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,235.13159793408357
+benign_admin,25,False,0.00,,
+scripted_attacker,25,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,50.79171275498567
+ai_agent_attacker,25,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,255.90316475453952
+benign_admin,26,False,0.00,,
+scripted_attacker,26,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,63.00521161948967
+ai_agent_attacker,26,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,237.17371708739714
+benign_admin,27,False,0.00,,
+scripted_attacker,27,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,57.04030369439121
+ai_agent_attacker,27,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,267.81914061684034
+benign_admin,28,False,0.00,,
+scripted_attacker,28,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,43.407930163465004
+ai_agent_attacker,28,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,241.77918575600944
+benign_admin,29,False,0.00,,
+scripted_attacker,29,True,6.00,high action tempo; lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,58.66432922221429
+ai_agent_attacker,29,True,4.75,lateral movement sequence; sensitive access followed by exfiltration attempt; multi-endpoint path; repeated high-risk administration tools,260.2764910339567
