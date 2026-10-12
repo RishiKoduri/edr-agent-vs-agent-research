@@ -16,12 +16,14 @@ This is not a live cyber range. It is a safe simulation layer for developing the
    - Mostly routine administrative or business targets
 
 2. Scripted attacker
-   - Fast, repetitive action tempo
-   - Fixed attack-chain ordering
+   - Includes noisy scripted and stealth scripted profiles
+   - Fast or moderately paced action tempo
+   - Repetitive attack-chain ordering
    - High-risk administration tools
-   - Clear lateral movement and sensitive-access path
+   - Clear or partially obscured lateral movement and sensitive-access path
 
 3. Adaptive AI-agent attacker
+   - Includes cautious AI, human-mimicking AI, and adaptive AI profiles
    - More variable timing than the scripted attacker
    - Partial human-noise mimicry
    - Some avoidance of obviously suspicious event types

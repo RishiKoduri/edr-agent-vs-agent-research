@@ -19,7 +19,12 @@ TOOLS_BY_ACTOR_PROFILE = {
     ActorProfile.HELPDESK: ["browser", "remote_assist", "powershell", "installer", "ticket_tool"],
     ActorProfile.SERVICE_ACCOUNT: ["backup_agent", "sync_agent", "python", "curl"],
     ActorProfile.SCRIPTED_ATTACKER: TOOLS_BY_CLASS[TrafficClass.SCRIPTED_ATTACKER],
+    ActorProfile.NOISY_SCRIPTED_ATTACKER: ["powershell", "net", "wmic", "curl", "certutil"],
+    ActorProfile.STEALTH_SCRIPTED_ATTACKER: ["powershell", "net", "python", "curl", "ssh"],
     ActorProfile.AI_AGENT_ATTACKER: TOOLS_BY_CLASS[TrafficClass.AI_AGENT_ATTACKER],
+    ActorProfile.CAUTIOUS_AI_AGENT: ["powershell", "python", "curl", "bash", "ssh"],
+    ActorProfile.HUMAN_MIMICKING_AI_AGENT: ["bash", "python", "git", "ssh", "browser"],
+    ActorProfile.ADAPTIVE_AI_AGENT: ["powershell", "python", "curl", "bash", "ssh", "net"],
 }
 
 BENIGN_PROFILES = (
@@ -28,6 +33,17 @@ BENIGN_PROFILES = (
     ActorProfile.SYSADMIN,
     ActorProfile.HELPDESK,
     ActorProfile.SERVICE_ACCOUNT,
+)
+
+SCRIPTED_ATTACKER_PROFILES = (
+    ActorProfile.NOISY_SCRIPTED_ATTACKER,
+    ActorProfile.STEALTH_SCRIPTED_ATTACKER,
+)
+
+AI_ATTACKER_PROFILES = (
+    ActorProfile.CAUTIOUS_AI_AGENT,
+    ActorProfile.HUMAN_MIMICKING_AI_AGENT,
+    ActorProfile.ADAPTIVE_AI_AGENT,
 )
 
 
@@ -114,31 +130,24 @@ def generate_session_from_profile(
             )
             timestamp += delta
         elif profile.traffic_class == TrafficClass.SCRIPTED_ATTACKER:
-            timestamp += rng.uniform(0.5, 4.0)
-            event_type = chain[step % len(chain)]
-            endpoint = endpoints[min(step // 6, len(endpoints) - 1)]
-            role = "unknown"
-            target = rng.choice(["domain-controller", "database", "file-share", "admin-host"])
-            command_quality = "scripted"
+            event_type, endpoint, role, target, command_quality, delta = scripted_attacker_event_fields(
+                profile.actor_profile,
+                rng,
+                chain,
+                endpoints,
+                step,
+            )
+            timestamp += delta
         else:
-            timing_floor = 2.0 + (profile.adaptation_level * 2.0)
-            timing_ceiling = 18.0 + (profile.adaptation_level * 15.0)
-            timestamp += rng.uniform(timing_floor, timing_ceiling)
-            jitter = rng.choice([0, 0, 1, -1 if profile.adaptation_level else 0])
-            event_type = chain[(step + jitter) % len(chain)]
-            endpoint = endpoints[min(step // max(7, 7 + profile.adaptation_level), len(endpoints) - 1)]
-            role = rng.choice(["admin", "developer"])
-            target = rng.choice(["database", "file-share", "admin-host", "logs"])
-            command_quality = rng.choices(
-                ["normal", "scripted", "corrected", "abandoned"],
-                weights=[
-                    2 + profile.adaptation_level,
-                    max(1, 5 - profile.adaptation_level),
-                    profile.adaptation_level,
-                    profile.adaptation_level,
-                ],
-                k=1,
-            )[0]
+            event_type, endpoint, role, target, command_quality, delta = ai_attacker_event_fields(
+                profile.actor_profile,
+                profile.adaptation_level,
+                rng,
+                chain,
+                endpoints,
+                step,
+            )
+            timestamp += delta
 
         if (
             profile.traffic_class == TrafficClass.AI_AGENT_ATTACKER
@@ -173,10 +182,20 @@ def generate_session_from_profile(
 
 def default_actor_profile(traffic_class: TrafficClass) -> ActorProfile:
     if traffic_class == TrafficClass.SCRIPTED_ATTACKER:
-        return ActorProfile.SCRIPTED_ATTACKER
+        return ActorProfile.NOISY_SCRIPTED_ATTACKER
     if traffic_class == TrafficClass.AI_AGENT_ATTACKER:
-        return ActorProfile.AI_AGENT_ATTACKER
+        return ActorProfile.CAUTIOUS_AI_AGENT
     return ActorProfile.SYSADMIN
+
+
+def adaptation_level_for_profile(actor_profile: ActorProfile) -> int:
+    if actor_profile == ActorProfile.CAUTIOUS_AI_AGENT:
+        return 1
+    if actor_profile == ActorProfile.HUMAN_MIMICKING_AI_AGENT:
+        return 3
+    if actor_profile == ActorProfile.ADAPTIVE_AI_AGENT:
+        return 4
+    return 0
 
 
 def benign_event_fields(
@@ -243,4 +262,86 @@ def benign_event_fields(
         rng.choice(["ticket-system", "logs", "repo", "internal-wiki"]),
         rng.choice(["normal", "mistyped", "abandoned", "corrected"]),
         rng.uniform(8.0, 90.0),
+    )
+
+
+def scripted_attacker_event_fields(
+    actor_profile: ActorProfile,
+    rng: random.Random,
+    chain: list[EventType],
+    endpoints: list[str],
+    step: int,
+) -> tuple[EventType, str, str, str, str, float]:
+    if actor_profile == ActorProfile.STEALTH_SCRIPTED_ATTACKER:
+        event_type = chain[(step + rng.choice([0, 0, 1])) % len(chain)]
+        if event_type in {EventType.LATERAL_MOVEMENT, EventType.EXFIL_ATTEMPT} and rng.random() < 0.25:
+            event_type = rng.choice([EventType.NETWORK_CONNECT, EventType.FILE_ACCESS])
+        return (
+            event_type,
+            endpoints[min(step // 8, len(endpoints) - 1)],
+            rng.choice(["developer", "admin"]),
+            rng.choice(["database", "file-share", "admin-host", "logs"]),
+            rng.choice(["scripted", "normal", "corrected"]),
+            rng.uniform(4.0, 20.0),
+        )
+
+    return (
+        chain[step % len(chain)],
+        endpoints[min(step // 6, len(endpoints) - 1)],
+        "unknown",
+        rng.choice(["domain-controller", "database", "file-share", "admin-host"]),
+        "scripted",
+        rng.uniform(0.5, 4.0),
+    )
+
+
+def ai_attacker_event_fields(
+    actor_profile: ActorProfile,
+    adaptation_level: int,
+    rng: random.Random,
+    chain: list[EventType],
+    endpoints: list[str],
+    step: int,
+) -> tuple[EventType, str, str, str, str, float]:
+    if actor_profile == ActorProfile.HUMAN_MIMICKING_AI_AGENT:
+        timing_floor = 12.0
+        timing_ceiling = 90.0
+        endpoint_window = 10
+        command_weights = [5, 1, 3, 3]
+        role_choices = ["developer", "admin"]
+    elif actor_profile == ActorProfile.ADAPTIVE_AI_AGENT:
+        timing_floor = 8.0
+        timing_ceiling = 80.0
+        endpoint_window = 11
+        command_weights = [5, 1, 4, 3]
+        role_choices = ["admin", "developer"]
+    else:
+        timing_floor = 2.0 + (adaptation_level * 2.0)
+        timing_ceiling = 18.0 + (adaptation_level * 15.0)
+        endpoint_window = max(7, 7 + adaptation_level)
+        command_weights = [
+            2 + adaptation_level,
+            max(1, 5 - adaptation_level),
+            adaptation_level,
+            adaptation_level,
+        ]
+        role_choices = ["admin", "developer"]
+
+    jitter = rng.choice([0, 0, 1, -1 if adaptation_level else 0])
+    event_type = chain[(step + jitter) % len(chain)]
+    if actor_profile in {ActorProfile.HUMAN_MIMICKING_AI_AGENT, ActorProfile.ADAPTIVE_AI_AGENT}:
+        if event_type in {EventType.LATERAL_MOVEMENT, EventType.EXFIL_ATTEMPT} and rng.random() < 0.45:
+            event_type = rng.choice([EventType.FILE_ACCESS, EventType.NETWORK_CONNECT, EventType.COMMAND_EXEC])
+
+    return (
+        event_type,
+        endpoints[min(step // endpoint_window, len(endpoints) - 1)],
+        rng.choice(role_choices),
+        rng.choice(["database", "file-share", "admin-host", "logs", "repo"]),
+        rng.choices(
+            ["normal", "scripted", "corrected", "abandoned"],
+            weights=command_weights,
+            k=1,
+        )[0],
+        rng.uniform(timing_floor, timing_ceiling),
     )

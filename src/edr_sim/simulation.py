@@ -1,7 +1,13 @@
 from __future__ import annotations
 
 from .detectors import BehavioralEDRDetector
-from .generators import BENIGN_PROFILES, generate_session
+from .generators import (
+    AI_ATTACKER_PROFILES,
+    BENIGN_PROFILES,
+    SCRIPTED_ATTACKER_PROFILES,
+    adaptation_level_for_profile,
+    generate_session,
+)
 from .models import ActorProfile, ArchitectureMode, EventType, SimulationRun, TrafficClass
 
 
@@ -63,14 +69,23 @@ def run_experiment(
                         actor_profile=benign_profile,
                     )
                 )
-            for traffic_class in (TrafficClass.SCRIPTED_ATTACKER, TrafficClass.AI_AGENT_ATTACKER):
-                adaptation_level = 2 if traffic_class == TrafficClass.AI_AGENT_ATTACKER else 0
+            for scripted_profile in SCRIPTED_ATTACKER_PROFILES:
                 runs.append(
                     run_trial(
-                        traffic_class,
+                        TrafficClass.SCRIPTED_ATTACKER,
                         seed,
                         architecture=architecture,
-                        adaptation_level=adaptation_level,
+                        actor_profile=scripted_profile,
+                    )
+                )
+            for ai_profile in AI_ATTACKER_PROFILES:
+                runs.append(
+                    run_trial(
+                        TrafficClass.AI_AGENT_ATTACKER,
+                        seed,
+                        architecture=architecture,
+                        adaptation_level=adaptation_level_for_profile(ai_profile),
+                        actor_profile=ai_profile,
                     )
                 )
     return runs

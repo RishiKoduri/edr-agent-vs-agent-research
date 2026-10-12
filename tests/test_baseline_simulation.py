@@ -8,7 +8,7 @@ from edr_sim.simulation import run_experiment, run_trial
 class BaselineSimulationTests(unittest.TestCase):
     def test_experiment_generates_all_traffic_classes(self):
         runs = run_experiment(range(2))
-        self.assertEqual(len(runs), 56)
+        self.assertEqual(len(runs), 80)
         self.assertEqual({run.traffic_class for run in runs}, set(TrafficClass))
         self.assertEqual({run.architecture for run in runs}, set(ArchitectureMode))
         self.assertTrue(
@@ -18,6 +18,15 @@ class BaselineSimulationTests(unittest.TestCase):
                 ActorProfile.SYSADMIN,
                 ActorProfile.HELPDESK,
                 ActorProfile.SERVICE_ACCOUNT,
+            }.issubset({run.actor_profile for run in runs})
+        )
+        self.assertTrue(
+            {
+                ActorProfile.NOISY_SCRIPTED_ATTACKER,
+                ActorProfile.STEALTH_SCRIPTED_ATTACKER,
+                ActorProfile.CAUTIOUS_AI_AGENT,
+                ActorProfile.HUMAN_MIMICKING_AI_AGENT,
+                ActorProfile.ADAPTIVE_AI_AGENT,
             }.issubset({run.actor_profile for run in runs})
         )
 
@@ -49,7 +58,7 @@ class BaselineSimulationTests(unittest.TestCase):
     def test_metric_summaries_are_generated(self):
         runs = run_experiment(range(3))
         self.assertEqual(len(summarize_by_architecture(runs)), 4)
-        self.assertEqual(len(summarize_by_class(runs)), 28)
+        self.assertEqual(len(summarize_by_class(runs)), 40)
 
 
 if __name__ == "__main__":

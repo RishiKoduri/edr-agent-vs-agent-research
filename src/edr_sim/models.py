@@ -30,7 +30,12 @@ class ActorProfile(str, Enum):
     HELPDESK = "helpdesk"
     SERVICE_ACCOUNT = "service_account"
     SCRIPTED_ATTACKER = "scripted_attacker"
+    NOISY_SCRIPTED_ATTACKER = "noisy_scripted_attacker"
+    STEALTH_SCRIPTED_ATTACKER = "stealth_scripted_attacker"
     AI_AGENT_ATTACKER = "ai_agent_attacker"
+    CAUTIOUS_AI_AGENT = "cautious_ai_agent"
+    HUMAN_MIMICKING_AI_AGENT = "human_mimicking_ai_agent"
+    ADAPTIVE_AI_AGENT = "adaptive_ai_agent"
 
 
 class ArchitectureMode(str, Enum):
