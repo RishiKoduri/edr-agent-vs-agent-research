@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="30.0" y="40.0" text-anchor="start" fill="#111827" font-family="Arial, sans-serif" font-size="24" font-weight="700">EDR architecture comparison</text>
+<line x1="90" y1="440" x2="950" y2="440" stroke="#111827"/>
+<line x1="90" y1="440.0" x2="950" y2="440.0" stroke="#E5E7EB"/>
+<text x="50.0" y="444.0" text-anchor="start" fill="#4B5563" font-family="Arial, sans-serif" font-size="12" font-weight="400">0%</text>
+<line x1="90" y1="368.0" x2="950" y2="368.0" stroke="#E5E7EB"/>
+<text x="50.0" y="372.0" text-anchor="start" fill="#4B5563" font-family="Arial, sans-serif" font-size="12" font-weight="400">20%</text>
+<line x1="90" y1="296.0" x2="950" y2="296.0" stroke="#E5E7EB"/>
+<text x="50.0" y="300.0" text-anchor="start" fill="#4B5563" font-family="Arial, sans-serif" font-size="12" font-weight="400">40%</text>
+<line x1="90" y1="224.0" x2="950" y2="224.0" stroke="#E5E7EB"/>
+<text x="50.0" y="228.0" text-anchor="start" fill="#4B5563" font-family="Arial, sans-serif" font-size="12" font-weight="400">60%</text>
+<line x1="90" y1="152.0" x2="950" y2="152.0" stroke="#E5E7EB"/>
+<text x="50.0" y="156.0" text-anchor="start" fill="#4B5563" font-family="Arial, sans-serif" font-size="12" font-weight="400">80%</text>
+<line x1="90" y1="80.0" x2="950" y2="80.0" stroke="#E5E7EB"/>
+<text x="50.0" y="84.0" text-anchor="start" fill="#4B5563" font-family="Arial, sans-serif" font-size="12" font-weight="400">100%</text>
+<rect x="146.5" y="173.6" width="30.0" height="266.4" fill="#2563EB"/>
+<text x="161.5" y="167.6" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="10" font-weight="400">74%</text>
+<rect x="180.5" y="346.4" width="30.0" height="93.6" fill="#DC2626"/>
+<text x="195.5" y="340.4" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="10" font-weight="400">26%</text>
+<rect x="214.5" y="440.0" width="30.0" height="0.0" fill="#F59E0B"/>
+<text x="197.5" y="488.0" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="12" font-weight="400" transform="rotate(-20 197.5 488.0)">local</text>
+<rect x="361.5" y="120.3" width="30.0" height="319.7" fill="#2563EB"/>
+<text x="376.5" y="114.3" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="10" font-weight="400">89%</text>
+<rect x="395.5" y="399.7" width="30.0" height="40.3" fill="#DC2626"/>
+<text x="410.5" y="393.7" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="10" font-weight="400">11%</text>
+<rect x="429.5" y="440.0" width="30.0" height="0.0" fill="#F59E0B"/>
+<text x="412.5" y="488.0" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="12" font-weight="400" transform="rotate(-20 412.5 488.0)">centralized</text>
+<rect x="576.5" y="95.8" width="30.0" height="344.2" fill="#2563EB"/>
+<text x="591.5" y="89.8" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="10" font-weight="400">96%</text>
+<rect x="610.5" y="424.2" width="30.0" height="15.8" fill="#DC2626"/>
+<rect x="644.5" y="440.0" width="30.0" height="0.0" fill="#F59E0B"/>
+<text x="627.5" y="488.0" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="12" font-weight="400" transform="rotate(-20 627.5 488.0)">federated</text>
+<rect x="791.5" y="120.3" width="30.0" height="319.7" fill="#2563EB"/>
+<text x="806.5" y="114.3" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="10" font-weight="400">89%</text>
+<rect x="825.5" y="399.7" width="30.0" height="40.3" fill="#DC2626"/>
+<text x="840.5" y="393.7" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="10" font-weight="400">11%</text>
+<rect x="859.5" y="440.0" width="30.0" height="0.0" fill="#F59E0B"/>
+<text x="842.5" y="488.0" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="12" font-weight="400" transform="rotate(-20 842.5 488.0)">hybrid</text>
+<rect x="90" y="513" width="14" height="14" fill="#2563EB"/>
+<text x="110.0" y="525.0" text-anchor="start" fill="#111827" font-family="Arial, sans-serif" font-size="12" font-weight="400">Detection rate</text>
+<rect x="280" y="513" width="14" height="14" fill="#DC2626"/>
+<text x="300.0" y="525.0" text-anchor="start" fill="#111827" font-family="Arial, sans-serif" font-size="12" font-weight="400">Attack success</text>
+<rect x="470" y="513" width="14" height="14" fill="#F59E0B"/>
+<text x="490.0" y="525.0" text-anchor="start" fill="#111827" font-family="Arial, sans-serif" font-size="12" font-weight="400">False positive</text>
+</svg>
