@@ -1,16 +1,25 @@
 import unittest
 
 from edr_sim.metrics import summarize_by_architecture, summarize_by_class
-from edr_sim.models import ArchitectureMode, TrafficClass
+from edr_sim.models import ActorProfile, ArchitectureMode, TrafficClass
 from edr_sim.simulation import run_experiment, run_trial
 
 
 class BaselineSimulationTests(unittest.TestCase):
     def test_experiment_generates_all_traffic_classes(self):
         runs = run_experiment(range(2))
-        self.assertEqual(len(runs), 24)
+        self.assertEqual(len(runs), 56)
         self.assertEqual({run.traffic_class for run in runs}, set(TrafficClass))
         self.assertEqual({run.architecture for run in runs}, set(ArchitectureMode))
+        self.assertTrue(
+            {
+                ActorProfile.OFFICE_WORKER,
+                ActorProfile.DEVELOPER,
+                ActorProfile.SYSADMIN,
+                ActorProfile.HELPDESK,
+                ActorProfile.SERVICE_ACCOUNT,
+            }.issubset({run.actor_profile for run in runs})
+        )
 
     def test_scripted_attacker_scores_higher_than_benign_admin(self):
         benign = run_trial(TrafficClass.BENIGN_ADMIN, seed=7)
@@ -40,7 +49,7 @@ class BaselineSimulationTests(unittest.TestCase):
     def test_metric_summaries_are_generated(self):
         runs = run_experiment(range(3))
         self.assertEqual(len(summarize_by_architecture(runs)), 4)
-        self.assertEqual(len(summarize_by_class(runs)), 12)
+        self.assertEqual(len(summarize_by_class(runs)), 28)
 
 
 if __name__ == "__main__":

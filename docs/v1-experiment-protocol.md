@@ -9,9 +9,11 @@ This is not a live cyber range. It is a safe simulation layer for developing the
 ## Traffic classes
 
 1. Benign admin
-   - Slower timing
-   - More idle gaps and human-noise events
-   - Mostly routine administrative targets
+   - Includes office worker, developer, sysadmin, helpdesk, and service account profiles
+   - Slower timing for human users
+   - More idle gaps and human-noise events for human users
+   - Regular scheduled behavior for service accounts
+   - Mostly routine administrative or business targets
 
 2. Scripted attacker
    - Fast, repetitive action tempo
@@ -95,4 +97,3 @@ These limitations are intentional for V1. The goal is to create a reproducible r
 4. Add per-endpoint event timelines.
 5. Add plots for detection rate and false-positive tradeoffs.
 6. Add a Wazuh/Sysmon mapping document showing how each synthetic field maps to realistic telemetry.
-

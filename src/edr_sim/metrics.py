@@ -4,13 +4,14 @@ from collections import defaultdict
 from dataclasses import dataclass
 from statistics import mean
 
-from .models import ArchitectureMode, SimulationRun, TrafficClass
+from .models import ActorProfile, ArchitectureMode, SimulationRun, TrafficClass
 
 
 @dataclass(frozen=True)
 class MetricRow:
     architecture: ArchitectureMode
     traffic_class: TrafficClass
+    actor_profile: ActorProfile
     runs: int
     detection_rate: float
     attack_success_rate: float
@@ -29,13 +30,13 @@ class ArchitectureMetricRow:
 
 
 def summarize_by_class(runs: list[SimulationRun]) -> list[MetricRow]:
-    grouped: dict[tuple[ArchitectureMode, TrafficClass], list[SimulationRun]] = defaultdict(list)
+    grouped: dict[tuple[ArchitectureMode, TrafficClass, ActorProfile], list[SimulationRun]] = defaultdict(list)
     for run in runs:
-        grouped[(run.architecture, run.traffic_class)].append(run)
+        grouped[(run.architecture, run.traffic_class, run.actor_profile)].append(run)
 
     rows: list[MetricRow] = []
-    for (architecture, traffic_class), group in sorted(
-        grouped.items(), key=lambda item: (item[0][0].value, item[0][1].value)
+    for (architecture, traffic_class, actor_profile), group in sorted(
+        grouped.items(), key=lambda item: (item[0][0].value, item[0][1].value, item[0][2].value)
     ):
         detection_times = [
             run.time_to_detection for run in group if run.time_to_detection is not None
@@ -44,6 +45,7 @@ def summarize_by_class(runs: list[SimulationRun]) -> list[MetricRow]:
             MetricRow(
                 architecture=architecture,
                 traffic_class=traffic_class,
+                actor_profile=actor_profile,
                 runs=len(group),
                 detection_rate=_rate(run.detected for run in group),
                 attack_success_rate=_rate(run.attack_success for run in group),
@@ -114,7 +116,7 @@ def render_markdown_summary(runs: list[SimulationRun]) -> str:
             "",
             "## Traffic-class results",
             "",
-            "| Architecture | Traffic class | Runs | Detection rate | Attack success rate | Avg. score | Avg. time to detection |",
+            "| Architecture | Traffic class and profile | Runs | Detection rate | Attack success rate | Avg. score | Avg. time to detection |",
             "|---|---|---:|---:|---:|---:|---:|",
         ]
     )
@@ -122,7 +124,7 @@ def render_markdown_summary(runs: list[SimulationRun]) -> str:
         lines.append(
             "| "
             f"{row.architecture.value} | "
-            f"{row.traffic_class.value} | "
+            f"{row.traffic_class.value} / {row.actor_profile.value} | "
             f"{row.runs} | "
             f"{row.detection_rate:.2f} | "
             f"{row.attack_success_rate:.2f} | "

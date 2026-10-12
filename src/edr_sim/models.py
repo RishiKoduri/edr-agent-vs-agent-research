@@ -23,6 +23,16 @@ class TrafficClass(str, Enum):
     AI_AGENT_ATTACKER = "ai_agent_attacker"
 
 
+class ActorProfile(str, Enum):
+    OFFICE_WORKER = "office_worker"
+    DEVELOPER = "developer"
+    SYSADMIN = "sysadmin"
+    HELPDESK = "helpdesk"
+    SERVICE_ACCOUNT = "service_account"
+    SCRIPTED_ATTACKER = "scripted_attacker"
+    AI_AGENT_ATTACKER = "ai_agent_attacker"
+
+
 class ArchitectureMode(str, Enum):
     LOCAL = "local"
     CENTRALIZED = "centralized"
@@ -49,6 +59,7 @@ class SessionProfile:
     traffic_class: TrafficClass
     seed: int
     session_id: str
+    actor_profile: ActorProfile
     endpoint_count: int = 5
     length: int = 32
     adaptation_level: int = 0
@@ -83,6 +94,7 @@ class DetectionResult:
 @dataclass(frozen=True)
 class SimulationRun:
     traffic_class: TrafficClass
+    actor_profile: ActorProfile
     architecture: ArchitectureMode
     seed: int
     session_id: str

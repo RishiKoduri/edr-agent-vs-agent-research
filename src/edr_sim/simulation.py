@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from .detectors import BehavioralEDRDetector
-from .generators import generate_session
-from .models import ArchitectureMode, EventType, SimulationRun, TrafficClass
+from .generators import BENIGN_PROFILES, generate_session
+from .models import ActorProfile, ArchitectureMode, EventType, SimulationRun, TrafficClass
 
 
 def run_trial(
@@ -12,21 +12,25 @@ def run_trial(
     architecture: ArchitectureMode = ArchitectureMode.CENTRALIZED,
     length: int = 32,
     adaptation_level: int = 0,
+    actor_profile: ActorProfile | None = None,
 ) -> SimulationRun:
     events = generate_session(
         traffic_class,
         seed=seed,
         length=length,
         adaptation_level=adaptation_level,
+        actor_profile=actor_profile,
     )
+    actor_profile = ActorProfile(events[0].metadata["actor_profile"])
     result = BehavioralEDRDetector(architecture=architecture).score(events)
     attack_success = infer_attack_success(events, detected=result.suspicious)
     is_attack = traffic_class != TrafficClass.BENIGN_ADMIN
     return SimulationRun(
         traffic_class=traffic_class,
+        actor_profile=actor_profile,
         architecture=architecture,
         seed=seed,
-        session_id=f"{traffic_class.value}-{architecture.value}-{seed}",
+        session_id=f"{actor_profile.value}-{architecture.value}-{seed}",
         detected=result.suspicious,
         score=result.score,
         reasons=result.reasons,
@@ -50,7 +54,16 @@ def run_experiment(
     runs: list[SimulationRun] = []
     for seed in seeds:
         for architecture in architectures:
-            for traffic_class in TrafficClass:
+            for benign_profile in BENIGN_PROFILES:
+                runs.append(
+                    run_trial(
+                        TrafficClass.BENIGN_ADMIN,
+                        seed,
+                        architecture=architecture,
+                        actor_profile=benign_profile,
+                    )
+                )
+            for traffic_class in (TrafficClass.SCRIPTED_ATTACKER, TrafficClass.AI_AGENT_ATTACKER):
                 adaptation_level = 2 if traffic_class == TrafficClass.AI_AGENT_ATTACKER else 0
                 runs.append(
                     run_trial(
