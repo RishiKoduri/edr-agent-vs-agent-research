@@ -8,21 +8,21 @@ The adaptation parameter is a controlled proxy for learned attacker behavior. It
 
 | Architecture | Adaptation level | Detection rate | Attack success rate | Mean score | Mean time to detection |
 |---|---:|---:|---:|---:|---:|
-| local | 0 | 0.800 | 0.200 | 5.025 | 257.65 |
-| local | 1 | 0.650 | 0.350 | 4.263 | 187.66 |
-| local | 2 | 0.450 | 0.550 | 3.837 | 239.16 |
-| local | 3 | 0.450 | 0.550 | 3.837 | 239.16 |
-| local | 4 | 0.450 | 0.550 | 3.837 | 239.16 |
-| centralized | 0 | 1.000 | 0.000 | 6.275 | 259.62 |
-| centralized | 1 | 0.950 | 0.050 | 5.513 | 240.49 |
-| centralized | 2 | 0.900 | 0.100 | 5.088 | 275.60 |
-| centralized | 3 | 0.900 | 0.100 | 5.088 | 275.60 |
-| centralized | 4 | 0.900 | 0.100 | 5.088 | 275.60 |
-| federated | 0 | 1.000 | 0.000 | 6.525 | 259.62 |
-| federated | 1 | 0.950 | 0.050 | 5.763 | 240.49 |
-| federated | 2 | 0.900 | 0.100 | 5.588 | 275.60 |
-| federated | 3 | 0.900 | 0.100 | 5.588 | 275.60 |
-| federated | 4 | 0.900 | 0.100 | 5.588 | 275.60 |
+| local | 0 | 1.000 | 0.000 | 6.700 | 54.90 |
+| local | 1 | 0.950 | 0.050 | 4.925 | 87.97 |
+| local | 2 | 0.800 | 0.200 | 4.487 | 138.66 |
+| local | 3 | 0.650 | 0.350 | 4.263 | 151.42 |
+| local | 4 | 0.550 | 0.450 | 4.100 | 254.39 |
+| centralized | 0 | 1.000 | 0.000 | 7.900 | 54.90 |
+| centralized | 1 | 1.000 | 0.000 | 6.175 | 88.71 |
+| centralized | 2 | 1.000 | 0.000 | 5.737 | 148.16 |
+| centralized | 3 | 0.950 | 0.050 | 5.513 | 194.05 |
+| centralized | 4 | 0.900 | 0.100 | 5.350 | 275.48 |
+| federated | 0 | 1.000 | 0.000 | 8.200 | 54.90 |
+| federated | 1 | 1.000 | 0.000 | 6.425 | 88.71 |
+| federated | 2 | 1.000 | 0.000 | 6.237 | 148.16 |
+| federated | 3 | 0.950 | 0.050 | 6.013 | 194.05 |
+| federated | 4 | 0.900 | 0.100 | 5.850 | 275.48 |
 
 ## Findings to investigate
 
@@ -31,6 +31,6 @@ The adaptation parameter is a controlled proxy for learned attacker behavior. It
 - Does the adaptation curve plateau, suggesting the detector has reached a blind spot?
 - Which results change when the detector threshold is varied?
 
-## Limitation
+## Model note
 
-Levels 2 through 4 currently share the same event-obfuscation branch in the generator. A later version should replace this proxy with a learned attacker policy or add more graduated behavior changes.
+The levels are graduated synthetic behavior changes, not a trained reinforcement-learning or language-model policy. A later version should replace this proxy with a learned attacker policy and compare the learned policy against these controlled levels.

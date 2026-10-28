@@ -149,14 +149,6 @@ def generate_session_from_profile(
             )
             timestamp += delta
 
-        if (
-            profile.traffic_class == TrafficClass.AI_AGENT_ATTACKER
-            and profile.adaptation_level >= 2
-            and event_type in {EventType.LATERAL_MOVEMENT, EventType.EXFIL_ATTEMPT}
-            and rng.random() < 0.35
-        ):
-            event_type = rng.choice([EventType.FILE_ACCESS, EventType.NETWORK_CONNECT])
-
         events.append(
             EndpointEvent(
                 timestamp=timestamp,
@@ -309,12 +301,20 @@ def ai_attacker_event_fields(
         endpoint_window = 10
         command_weights = [5, 1, 3, 3]
         role_choices = ["developer", "admin"]
+        obfuscation_probability = 0.45
     elif actor_profile == ActorProfile.ADAPTIVE_AI_AGENT:
-        timing_floor = 8.0
-        timing_ceiling = 80.0
-        endpoint_window = 11
-        command_weights = [5, 1, 4, 3]
+        level = max(0, min(adaptation_level, 4))
+        timing_floor = 2.0 + (level * 1.5)
+        timing_ceiling = 18.0 + (level * 15.5)
+        endpoint_window = 7 + level
+        command_weights = [
+            2 + level,
+            max(1, 5 - level),
+            level,
+            level,
+        ]
         role_choices = ["admin", "developer"]
+        obfuscation_probability = level * 0.15
     else:
         timing_floor = 2.0 + (adaptation_level * 2.0)
         timing_ceiling = 18.0 + (adaptation_level * 15.0)
@@ -326,11 +326,12 @@ def ai_attacker_event_fields(
             adaptation_level,
         ]
         role_choices = ["admin", "developer"]
+        obfuscation_probability = 0.0
 
     jitter = rng.choice([0, 0, 1, -1 if adaptation_level else 0])
     event_type = chain[(step + jitter) % len(chain)]
     if actor_profile in {ActorProfile.HUMAN_MIMICKING_AI_AGENT, ActorProfile.ADAPTIVE_AI_AGENT}:
-        if event_type in {EventType.LATERAL_MOVEMENT, EventType.EXFIL_ATTEMPT} and rng.random() < 0.45:
+        if event_type in {EventType.LATERAL_MOVEMENT, EventType.EXFIL_ATTEMPT} and rng.random() < obfuscation_probability:
             event_type = rng.choice([EventType.FILE_ACCESS, EventType.NETWORK_CONNECT, EventType.COMMAND_EXEC])
 
     return (

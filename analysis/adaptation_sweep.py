@@ -145,9 +145,9 @@ def write_report(results: list[AdaptationRun], path: Path) -> None:
             "- Does the adaptation curve plateau, suggesting the detector has reached a blind spot?",
             "- Which results change when the detector threshold is varied?",
             "",
-            "## Limitation",
+            "## Model note",
             "",
-            "Levels 2 through 4 currently share the same event-obfuscation branch in the generator. A later version should replace this proxy with a learned attacker policy or add more graduated behavior changes.",
+            "The levels are graduated synthetic behavior changes, not a trained reinforcement-learning or language-model policy. A later version should replace this proxy with a learned attacker policy and compare the learned policy against these controlled levels.",
             "",
         ]
     )

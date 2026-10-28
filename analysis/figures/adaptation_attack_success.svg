@@ -13,9 +13,9 @@
 <text x="45" y="161.0" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#4B5563">0.8</text>
 <line x1="80" y1="75.0" x2="945" y2="75.0" stroke="#E5E7EB"/>
 <text x="45" y="79.0" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#4B5563">1.0</text>
-<polyline points="80.0,403.0 296.2,341.5 512.5,259.5 728.8,259.5 945.0,259.5" fill="none" stroke="#6B7280" stroke-width="3"/>
-<polyline points="80.0,485.0 296.2,464.5 512.5,444.0 728.8,444.0 945.0,444.0" fill="none" stroke="#2563EB" stroke-width="3"/>
-<polyline points="80.0,485.0 296.2,464.5 512.5,444.0 728.8,444.0 945.0,444.0" fill="none" stroke="#059669" stroke-width="3"/>
+<polyline points="80.0,485.0 296.2,464.5 512.5,403.0 728.8,341.5 945.0,300.5" fill="none" stroke="#6B7280" stroke-width="3"/>
+<polyline points="80.0,485.0 296.2,485.0 512.5,485.0 728.8,464.5 945.0,444.0" fill="none" stroke="#2563EB" stroke-width="3"/>
+<polyline points="80.0,485.0 296.2,485.0 512.5,485.0 728.8,464.5 945.0,444.0" fill="none" stroke="#059669" stroke-width="3"/>
 <line x1="80" y1="485" x2="945" y2="485" stroke="#111827"/>
 <text x="512.5" y="535" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#111827">Attacker adaptation level</text>
 <rect x="80" y="505" width="14" height="14" fill="#6B7280"/>

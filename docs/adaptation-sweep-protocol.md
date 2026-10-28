@@ -36,4 +36,4 @@ Outputs:
 
 ## Limitation and next refinement
 
-Adaptation levels 2 through 4 currently share the same obfuscation branch. The next refinement should introduce more graduated changes or replace the proxy with a learned attacker policy so the curve represents a richer adaptation process.
+The levels now use graduated timing, endpoint movement, command-quality, and event-obfuscation changes. They remain a controlled proxy rather than a trained reinforcement-learning or language-model policy. The next refinement should compare this proxy against a learned attacker policy.
