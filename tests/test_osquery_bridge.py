@@ -32,6 +32,13 @@ class OsqueryBridgeTests(unittest.TestCase):
         self.assertEqual(infer_event_type({"query_name": "process_events"}), EventType.PROCESS_START)
         self.assertEqual(infer_event_type({"query_name": "network_sockets"}), EventType.NETWORK_CONNECT)
 
+    def test_json_array_output_is_supported(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "shell-output.json"
+            path.write_text('[{"name": "launchd", "pid": "1"}]')
+            rows = read_osquery_jsonl(path)
+        self.assertEqual(rows[0]["name"], "launchd")
+
     def test_synthetic_fixture_scores_human_and_ai_sessions(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "fixture.jsonl"

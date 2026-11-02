@@ -12,20 +12,31 @@ from .models import ArchitectureMode, EndpointEvent, EventType
 
 
 def read_osquery_jsonl(path: Path) -> list[dict[str, Any]]:
-    """Read newline-delimited osquery-style JSON observations."""
+    """Read newline-delimited or shell-mode JSON osquery observations."""
+
+    text = path.read_text()
+    try:
+        payload = json.loads(text)
+    except json.JSONDecodeError:
+        payload = None
+    if payload is not None:
+        if isinstance(payload, dict):
+            return [payload]
+        if isinstance(payload, list) and all(isinstance(row, dict) for row in payload):
+            return payload
+        raise ValueError(f"{path} must contain JSON objects or a JSON array of objects")
 
     rows: list[dict[str, Any]] = []
-    with path.open() as handle:
-        for line_number, line in enumerate(handle, start=1):
-            if not line.strip():
-                continue
-            try:
-                row = json.loads(line)
-            except json.JSONDecodeError as error:
-                raise ValueError(f"invalid JSON on line {line_number} of {path}") from error
-            if not isinstance(row, dict):
-                raise ValueError(f"line {line_number} of {path} is not a JSON object")
-            rows.append(row)
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        if not line.strip():
+            continue
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError as error:
+            raise ValueError(f"invalid JSON on line {line_number} of {path}") from error
+        if not isinstance(row, dict):
+            raise ValueError(f"line {line_number} of {path} is not a JSON object")
+        rows.append(row)
     return rows
 
 

@@ -10,7 +10,7 @@ Osquery is primarily an endpoint instrumentation and visibility tool. A table sn
 
 ## Supported input
 
-The input is newline-delimited JSON. Each row can include:
+The input can be newline-delimited JSON or the JSON array returned by an osquery shell query. Each row can include:
 
 - `event_type`
 - `timestamp` or `time`
